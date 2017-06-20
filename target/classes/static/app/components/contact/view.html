@@ -1,0 +1,98 @@
+
+<div class="container containerSyle" >
+
+    <div class="col-md-12">
+
+        <div class="col-md-3"><br/></div>
+
+        <div class="col-md-6">
+            <center><h1>Contact</h1><br/></center>
+            <form name="cForm">
+
+
+
+                <div class="form-group">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control " style=" width: 12% !important;" id="id" ng-model="formData.idContact" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Full name</label>
+                    <input type="text" class="form-control"  name="fullnametxt" id="name" ng-model="formData.fullName" required>
+                    <span ng-show="!cForm.$pristine && cForm.fullnametxt.$error.required"  class="RedFont">Full name is required.</span>
+
+
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+
+
+                    <input type="text" class="form-control" id="phone" name="phonetxt" ng-model="formData.phone"  required  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "11">
+                    <span ng-show="!cForm.$pristine && cForm.phonetxt.$error.required"  class="RedFont">Phone is required.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="adde">Address</label>
+                    <textarea class="form-control" id="adde" style="height: 100px !important;" name="addresstxt"  ng-model="formData.address" required> </textarea>
+                    <span ng-show="!cForm.$pristine && cForm.addresstxt.$error.required"  class="RedFont">Address is required.</span>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-info" ng-show="!showSaveButton" ng-click="clean()">Clean</button>
+                    <button type="submit" class="btn btn-success" ng-show="!showSaveButton" ng-disabled="!cForm.$valid" ng-click="updateContact()">Update</button>
+                    <button type="submit" class="btn btn-danger" ng-show="!showSaveButton" ng-disabled="!cForm.$valid" ng-click="deleteContact()">Delate</button>
+                    <button type="submit" class="btn btn-primary" ng-show="showSaveButton" ng-click="saveContact()" ng-disabled="!cForm.$valid">Save</button>
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="col-md-3"><br/></div>
+
+
+
+
+    </div>
+
+    <div class="col-md-12">
+
+<div class="pull-left">
+
+    <h2>List of contacts</h2>
+    <span ng-show="!contacts.length != 0"   class="RedFont">There are no records in the list.</span>
+
+</div>
+
+<table class="table table-striped table-inverse" ng-show="contacts.length != 0" >
+    <thead >
+    <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Created Date</th>
+        <th>Phone</th>
+        <th>Address</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="contact in contacts">
+        <th scope="row">{{contact.idContact}}</th>
+        <td>{{contact.fullName}}</td>
+        <td>{{contact.createdDate  | date: short}}</td>
+        <td>{{contact.phone}}</td>
+        <td>{{contact.address}}</td>
+        <td><span  ng-click="selectContact(contact)" class="glyphicon glyphicon-eye-open IconRemove"></span></td>
+
+
+
+    </tr>
+
+    </tbody>
+</table>
+
+        </div>
+
+    </div>
+
+
